@@ -1,0 +1,31 @@
+
+
+
+<div class="container main-container">
+  <h1>Fire  Chat</h1>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-outline-danger"
+              *ngIf="_cs.usuario"
+              type = "button" (click)="salir()">
+        Salir
+      </button>
+    </div>
+  </div>
+
+  <app-login *ngIf="!_cs.usuario"></app-login>
+
+  <div *ngIf="_cs.usuario"
+       class="chat-window">
+    <app-chat></app-chat>
+  </div>
+</div>
+
+
+<!-- <ul>
+  <li class="text" *ngFor="let chat of chats | async">
+    {{ chat | json }}
+  </li>
+</ul> -->
