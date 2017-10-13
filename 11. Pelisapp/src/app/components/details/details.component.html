@@ -1,0 +1,28 @@
+
+<div class="container margin-top">
+
+  <div class="row"
+        *ngIf="movie">
+    <h2>{{ movie.title }}</h2>
+  </div>
+
+  <div class="row"
+        *ngIf="movie">
+    <div class="col-lg-6">
+      <img  [src]="'http://image.tmdb.org/t/p/w500' + movie.poster_path" alt="">
+    </div>
+
+    <div class="col-lg-6">
+      <h3 class="b-bottom">Sipnosis</h3>
+      <p class="text-justify"> {{movie.overview}} </p>
+
+      <p>Popularidad: <span class="badge badge-primary">{{ movie.popularity }}</span></p>
+      <p>Voto promedio: <span class="badge badge-primary">{{ movie.vote_average }}</span></p>
+
+      <button class="btn btn-outline-warning" (click)="return()">
+        Regresar
+      </button>
+    </div>
+  </div>
+
+</div>

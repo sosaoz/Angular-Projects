@@ -1,0 +1,42 @@
+
+
+<div class="container margin-top">
+
+  <div class="input-group margin-bottom-sm">
+    <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+
+    <input [(ngModel)]="termino"
+           (keyup)="searchMovie()"
+           name="termino"
+           class="form-control" type="text"
+           placeholder="Nombre de pelicula...">
+  </div>
+
+  <div class="row margin-top"
+      *ngIf="termino">
+
+    <div class="card-columns">
+
+      <div class="card"
+           *ngFor="let movie of buscador">
+
+        <img class="card-img-top"
+             [src]="'http://image.tmdb.org/t/p/w300' + movie.poster_path"
+             alt="Poster image">
+
+        <div class="card-body">
+          <h4 class="card-title">{{movie.title}}</h4>
+          <p class="card-text">{{movie.overview}}</p>
+          <a class="btn btn-outline-primary btn-block"
+                  [routerLink]="['/search/details', movie.id]">
+            Ver mas...
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
