@@ -1,0 +1,93 @@
+
+
+<app-navbar></app-navbar>
+
+<div class="container main-container">
+
+  <div class="row">
+
+    <div class="col-md-4">
+
+      <div *ngIf="!marcadorSel" class="animated fadeIn fast">
+        <div class="alert alert-info" role="alert">
+          <strong>Haga Click</strong>
+          Cree un Marcador o Seleccionelo.
+        </div>
+      </div>
+
+      <div *ngIf="marcadorSel"
+            class="animated fadeIn fast">
+        <h5>Marcador</h5>
+        <hr>
+
+        <div class="form-group">
+          <label>Titulo</label>
+          <input [(ngModel)]="marcadorSel.titulo"
+                 name="titulo"
+                 type="text"
+                 class="form-control" >
+        </div>
+
+        <div class="form-group">
+          <label>Descripcion</label>
+          <textarea [(ngModel)]="marcadorSel.desc"
+                    name="desc"
+                    type="text"
+                    rows="5"
+                    class="form-control" >
+          </textarea>
+        </div>
+
+        <div class="form-group">
+          <label> Es Arrastable? </label>
+          <select [(ngModel)]="marcadorSel.draggable"
+                  name="draggable" class="form-control">
+            <option [ngValue]="true">Si</option>
+            <option [ngValue]="false">No</option>
+          </select>
+        </div>
+
+        <button (click)="_ms.guardarMarcadores();"
+                class="btn btn-outline-primary btn-block"
+                type="button">
+          Guardar Cambios
+        </button>
+        <hr>
+
+      </div>
+    </div>
+
+    <div class="col-md-8 animated fadeIn fast">
+      <agm-map [latitude]="lat" [longitude]="lng"
+               [zoom]="zoom"
+               (mapClick)="clickMapa( $event )">
+
+        <agm-marker *ngFor="let marcador of _ms.marcadores; let i = index"
+                    [latitude]="marcador.lat"
+                    [longitude]="marcador.lng"
+                    [title]="marcador.titulo"
+                    [markerDraggable]="marcador.draggable"
+                    (markerClick)="clickMarcador( marcador, i )"
+                    (dragEnd)="dragEndMarcador(marcador, $event)">
+          <agm-info-window>
+            <strong>{{ marcador.titulo }}</strong>
+            <p *ngIf="marcador.desc">
+              {{ marcador.desc }}
+            </p>
+
+            <p>
+              <a (click)="_ms.borrarMarcador(i); marcadorSel=null;"
+                 class="text-danger puntero">
+                 Borrar Marcador
+              </a>
+
+            </p>
+
+          </agm-info-window>
+        </agm-marker>
+
+      </agm-map>
+
+    </div>
+  </div>
+</div>
